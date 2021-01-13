@@ -2,18 +2,7 @@
 	<div id="app">
 		<div class="columns">
 			<div class="column background__gray--light">
-				<div class="header">Add new one</div>
-				<div class="form">
-					<input type="text" class="form__control" placeholder="TITLE" v-model="task.title">
-					<textarea class="form__control form__textarea" placeholder="DESCRIPTION" v-model="task.description"></textarea>
-					<select class="form__control" v-model="task.term">
-						<option>TODAY</option>
-						<option>TOMORROW</option>
-					</select>
-					<div class="text-center">
-						<button type="button" class="button" @click="addTask">Add</button>
-					</div>
-				</div>
+				<AddTask @onAddTask="onAddTask" />
 			</div>
 			<div class="column background__gray--strong">
 				<Tasks caption="today" :tasks="tasks['today']">
@@ -30,18 +19,13 @@
 </template>
 
 <script>
+import AddTask from "@/components/AddTask";
 import Tasks from "@/components/Tasks";
 
 export default {
 	name: "App",
 	data() {
 		return {
-			task: {
-				title: "",
-				description: "",
-				completed: false,
-				term: "TODAY"
-			},
 			tasks: {
 				"today": [],
 				"tomorrow": []
@@ -49,27 +33,23 @@ export default {
 		}
 	},
 	methods: {
-		addTask() {
-			if(this.task.title.length > 0) {
-				let task = JSON.parse(JSON.stringify(this.task));
-
-				this.tasks[this.task.term.toLowerCase()].push(task);
-				this.clearTaskInputs();
-			}
-		},
-		clearTaskInputs() {
-			this.task.title = "";
-			this.task.description = "";
-		},
 		allTaskComplet(term) {
 			this.tasks[term] = this.tasks[term].map(task => {
 				task.completed = true;
 
 				return task;
 			})
+		},
+		onAddTask(data) {
+			if(data.title.length > 0) {
+				let task = JSON.parse(JSON.stringify(data));
+
+				this.tasks[data.term.toLowerCase()].push(task);
+			}
 		}
 	},
 	components: {
+		AddTask,
 		Tasks
 	}
 }
