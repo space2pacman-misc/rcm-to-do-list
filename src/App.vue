@@ -196,7 +196,7 @@ body {
 	background-image: url("~@/assets/icon-close.svg");
 	background-size: 65%;
 	background-repeat: no-repeat;
-	background-position: 45% 45%;
+	background-position: 50% 50%;
 }
 
 .task__header {
