@@ -81,7 +81,7 @@ body {
 }
 
 #app {
-	width: 1072px;
+    max-width: 1000px;
 	margin: 0 auto;
 	height: 100vh;
 	font-family: Arial;
