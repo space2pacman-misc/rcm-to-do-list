@@ -181,6 +181,7 @@ body {
 
 .task__header {
 	display: flex;
+	align-items: center;
 }
 
 .task__title {
